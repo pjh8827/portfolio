@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace: pakage + class name : mapper를 구별하기 위한 이름 -->
+<mapper namespace="com.ssafy.model.FoodMapper">
+
+
+
+	<select id="select" resultType="food" parameterType="int">
+		select *
+		from food where code = #{id}
+
+	</select>
+
+	<select id="selectAll" resultType="food">
+		select * from food
+	</select>
+	
+	<select id="getBoardList" resultType="food">
+		SELECT * FROM food
+		ORDER BY code DESC
+		LIMIT #{startList}, #{listSize}
+	</select>
+	
+	<select id="getBoardListCnt" resultType="int">
+
+		SELECT
+			count(*) as listCnt
+		FROM
+			food
+
+	</select>
+
+
+	
+
+	<insert id="insert" parameterType="food">
+		insert into food
+		(code
+		,name
+		,supportpereat
+		,calory
+		,carbo
+		,protein
+		,fat
+		,sugar
+		,natrium
+		,chole
+		,fattyacid
+		,transfat
+		,maker
+		,material
+		,img
+		,allergy
+		,viewcnt
+		) values(
+		#{code}
+		,#{name}
+		,#{supportpereat}
+		,#{calory}
+		,#{carbo}
+		,#{protein}
+		,#{fat}
+		,#{sugar}
+		,#{natrium}
+		,#{chole}
+		,#{fattyacid}
+		,#{transfat}
+		,#{maker}
+		,#{material}
+		,#{img}
+		,#{allergy}
+		,#{viewcnt}
+
+
+		)
+	</insert>
+
+	<!-- 조건검색 해쉬맵으로 동적 sql 처리 select * from food where #{condition} like concat('%', 
+		#{key}, '%') -->
+	<select id="searchByCondition" resultType="food"
+		parameterType="hashmap">
+		select * from food where
+		<choose>
+			<when test="condition=='name'">
+				name like #{key}
+			</when>
+			<when test="condition== 'maker'">
+				maker like #{key}
+			</when>
+			<when test="condition=='material'">
+				material like #{key}
+			</when>
+			<otherwise>
+				like '%'
+			</otherwise>
+
+		</choose>
+
+	</select>
+
+	<select id="getViewCnt" parameterType="int">
+		select viewcnt from food
+		where code = #{id}
+	</select>
+
+
+	<update id="addViewCnt" parameterType="int">
+		update food
+		set
+		viewcnt=viewcnt+1
+		where code = #{id}
+	</update>
+
+
+
+
+</mapper>

@@ -1,0 +1,2 @@
+관련 filter=lfs diff=lfs merge=lfs -text
+자료/UCC.mp4 filter=lfs diff=lfs merge=lfs -text
