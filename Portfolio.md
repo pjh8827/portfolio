@@ -4,7 +4,6 @@
 > 1992 .07 .16                    
 > 010-7185-3377                  
 > pjh5929@naver.com
->
 > github.com/pjh8827 
 
 -------------------     ----------------------------
@@ -62,13 +61,9 @@
 기술경험 (프로젝트 : 심봉사)
 --------------------
 
-**Spring Boot**
+**Spring Boot** ![spring boot](https://img.shields.io/badge/spring_boot-2.2.4-Green?logo=spring )
 
-  ![spring boot](https://img.shields.io/badge/spring boot-2.2.4-Green?logo=spring )
-
-**Spring Security**
-
- ![spring security](https://img.shields.io/badge/spring security-2.2.4-Green?logo=spring )
+**Spring Security** ![spring security](https://img.shields.io/badge/spring_security-2.2.4-Green?logo=spring )
 
 **Maven** ![maven](https://img.shields.io/badge/maven-4.0.0-red?logo=apache )
 
