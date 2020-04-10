@@ -1,5 +1,0 @@
-http://apis.data.go.kr/1470000/FoodNtrIrdntInfoService/getFoodNtrItdntList?ServiceKey=VhV%2BKsNjBo0fEzXZKe%2Bvg%2B5ma5V6yRBggE7g%2BeUGz0SrYsZ%2FvVr7Kv70RHPzPJGqga%2Fk0DerMNhOzmPbSdd57g%3D%3D&desc_kor=%EB%B9%84%EB%B9%84
-
-
-
-http://apis.data.go.kr/B553748/CertImgListService/getCertImgListService?ServiceKey=HA1x75KCl7PpdcZamrJeRzgJIL%2F8wf1ofSBzYwhFl8Mj8GCHS0KozO%2Bojwd19GIZxkwPC9zDqMMWJeOq3h09cw%3D%3D&prdlstNm=%EB%B9%84%EB%B9%84%EB%B9%85
