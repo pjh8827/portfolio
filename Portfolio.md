@@ -1,17 +1,19 @@
 # 박정환(Park Junghwan) 포트폴리오
 
 -------------------     ----------------------------
-1992 .07 .16                       pjh5929@naver.com
-010-7185-3377                  github.com/pjh8827 
+> 1992 .07 .16                    
+> 010-7185-3377                  
+> pjh5929@naver.com
+> github.com/pjh8827 
 
 -------------------     ----------------------------
 
 학력
 ---------
 
-2012-2019 (졸업)
-:   **충북대학교  (ChungBuk National University)** 
-    소프트웨어학과 (Software Engineering)
+
+**충북대학교  (ChungBuk National University)** 
+소프트웨어학과 (Software Engineering)
 
 
 
@@ -59,7 +61,7 @@
 기술경험 (프로젝트 : 심봉사)
 --------------------
 
-**Spring Boot** ![spring boot](https://img.shields.io/badge/spring boot-2.2.4-Green?logo=spring )
+**Spring Boot**  ![spring boot](https://img.shields.io/badge/spring boot-2.2.4-Green?logo=spring )
 
 **Spring Security** ![spring security](https://img.shields.io/badge/spring security-2.2.4-Green?logo=spring )
 
@@ -72,6 +74,8 @@
 **Django** ![django](https://img.shields.io/badge/django-2.2.7-yellow?logo=django)
 
 [ref]: https://github.com/pjh8827/Portfolio/tree/master/Simbongsa/back_end
+
+
 
 그 외 공부모음
 ----------------------------------------
