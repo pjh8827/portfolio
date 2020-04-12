@@ -22,7 +22,7 @@
 
 **DB ERD** 
 
-소프트웨어학과 (Software Engineering)
+
 
 
 
