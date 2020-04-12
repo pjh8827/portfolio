@@ -1,3 +1,5 @@
+
+
 # 심봉사 (봉사활동  SNS)
 
 -------------------     ----------------------------
@@ -11,9 +13,9 @@
 >
 > [JWT 인증 시퀀스](#JWT-인증-시퀀스)
 >
-> [Oauth 인증 시퀀스](#Oauth-인증-시퀀스)
+> [Oauth 인증](#Oauth-인증)
 >
-> [AWS에 도커로 이미지화 작업 및 배포](#AWS에-도커로-이미지화-작업-및-배포)
+> [AWS에 BackEnd 배포](#AWS-BackEnd-배포)
 
 -------------------     ----------------------------
 
@@ -241,21 +243,158 @@ Map Class Diagram
 
 JWT Generate Sequence Diagram
 
+![JWT_Generate](https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/readme_img/jwt_sequence1.PNG?raw=true)
 
+JWT Valiate Sequence Diagram
+
+![JWT_Validate](https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/readme_img/jwt_sequence2.PNG?raw=true)
+
+JWT Class Diagram
+
+![JWT_Class_Diagram](https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/readme_img/jwt_class_diagram.PNG?raw=true)
 
 사용한 곳
 
 > 1. 회원 인증 처리
+>
+>    > ```java
+>    > @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+>    > 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+>    > 
+>    > 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+>    > 		final String email = authenticationRequest.getUsername();
+>    > 		final int id = userDetailsService.loadUserIdByUsername(authenticationRequest.getUsername());
+>    > 		final String userId = userDetailsService.loadUserNickByUsername(authenticationRequest.getUsername());
+>    > 		final String token = jwtTokenUtil.generateToken(email, userId, id);
+>    > 		Member member = memberDao.searchByEmail(email);
+>    > 		
+>    > 		if(member.getM_key().equals("Y"))
+>    > 			return ResponseEntity.ok(new JwtResponse(token));
+>    > 		else 
+>    > 			return ResponseEntity.ok("EmailAuthenticateNeed");
+>    > 	}
+>    > 
+>    > private void authenticate(String username, String password) throws Exception {
+>    > 		try {
+>    > 			System.out.println("이메일 : " + username);
+>    > 			System.out.println("비밀번호 : " + password);
+>    > 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+>    > 		} catch (DisabledException e) {
+>    > 			throw new Exception("USER_DISABLED", e);
+>    > 		} catch (BadCredentialsException e) {
+>    > 			throw new Exception("INVALID_CREDENTIALS", e);
+>    > 		}
+>    > 	}
+>    > 
+>    > public static final long JWT_TOKEN_VALIDITY = 24 * 60 * 60 * 365;
+>    > 
+>    > private String doGenerateToken(Map<String, Object> claims, String issuer, String subject, String audience) {
+>    > 
+>    > 		return Jwts.builder().setClaims(claims).setIssuer(issuer).setSubject(subject).setAudience(audience).setIssuedAt(new Date(System.currentTimeMillis()))
+>    > 				.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
+>    > 				.signWith(SignatureAlgorithm.HS512, secret).compact();
+>    > 	}
+>    > ```
+>
 > 2. 비밀번호 변경
-
-
+>
+>    >```Java
+>    >// 비밀번호 변경 발송 이메일
+>    >	public boolean mailSendForPassword(String m_email) {
+>    >		Member member = memberDao.searchByEmail(m_email);
+>    >		//토큰 발급
+>    >		String passtoken = jwtTokenUtil.generateTokenPass(member.getM_email(), member.getM_userid(), member.getM_id());
+>    >		
+>    >		MimeMessage mail = javaMailSender.createMimeMessage();
+>    >		String htmlStr = "<h2>안녕하세요 心봉사 입니다!</h2><br><br>" + "<h3>" + m_email.substring(0, m_email.lastIndexOf("@"))
+>    >				+ "님</h3>" + "<p>변경하기 버튼을 누르시면 비밀번호를 변경하실 수 있습니다 : "
+>    >				+ "<a href='http://i02a205.p.ssafy.io/changepassword/" + passtoken
+>    >				+ "'>변경하기</a></p>" + "(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
+>    >		try {
+>    >			mail.setSubject("[본인인증] 心봉사님의 비밀번호 변경메일입니다", "utf-8");
+>    >			mail.setText(htmlStr, "utf-8", "html");
+>    >			mail.addRecipient(RecipientType.TO, new InternetAddress(m_email));
+>    >			javaMailSender.send(mail);
+>    >			return true;
+>    >		} catch (MessagingException e) {
+>    >			e.printStackTrace();
+>    >			return false;
+>    >		}
+>    >
+>    >	}
+>    >
+>    >public static final long JWT_TOKEN_VALIDITY_PASSWORD = 60 * 5;
+>    >
+>    >private String doGenerateTokenPass(Map<String, Object> claims, String issuer, String subject, String audience) {
+>    >
+>    >		return Jwts.builder().setClaims(claims).setIssuer(issuer).setSubject(subject).setAudience(audience).setIssuedAt(new Date(System.currentTimeMillis()))
+>    >				.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY_PASSWORD * 1000))
+>    >				.signWith(SignatureAlgorithm.HS512, secret).compact();
+>    >	}
+>    >```
 
 참조 글 : https://www.javainuse.com/spring/boot-jwt
 
-## Oauth 인증 시퀀스
+## Oauth 인증
+
 ----------------------------------------
 
+Oauth2.0을 이용한 구글 소셜로그인
+
+```java
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+
+@RequestMapping(value = "/loginByGoogle", method = RequestMethod.POST)
+	public ResponseEntity<?> saveUserG(@RequestBody String receive_idToken) throws Exception {
+
+		final HttpTransport transport = new NetHttpTransport();
+		final JacksonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+
+		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
+				.setAudience(Collections.singletonList(MY_APP_GOOGLE_CLIENT_ID)).build();
+		GoogleIdToken idToken;
+
+		Member member = new Member();
+		try {
+			idToken = verifier.verify(receive_idToken);
+			if (idToken == null) {
+				System.out.println("토큰값이 없어요");
+			}else {
+				Payload payload = idToken.getPayload();
+
+				// Print user identifier
+				String email = payload.getEmail();
+				//String userid = email.substring(0, email.lastIndexOf("@"));
+				String userid = email.substring(0, email.lastIndexOf("@") + 1); //일단 유저아이디에도 이메일 또는 특수문자가 들어가게 함.
+				member.setM_email(email);
+				member.setM_userid(userid);
+				Member mem = memberDao.searchByEmail(email);
+				if (mem == null) {
+					userDetailsService.saveByGoogle(member);
+				}
+				member = memberDao.searchByEmail(email);
+			}
+		} catch (GeneralSecurityException | IOException e) {
+			e.printStackTrace();
+		}
+		final String email = member.getM_email();
+		final int id = member.getM_id();
+		final String userId = member.getM_userid();
+		final String token = jwtTokenUtil.generateToken(email, userId, id);
+
+		return ResponseEntity.ok(new JwtResponse(token));
+	}
+```
 
 
-## AWS에 도커로 이미지화 작업 및 배포
+
+## AWS에 BackEnd 배포
+
 ----------------------------------------
+
+1. AWS에 Docker 설치 -> Docker에 MySQL 설치 및 이미지화 -> MySQL 구동
+2. AWS에 Tomcat 설치 -> Tomcat 구동
+3. 로컬에서 Filzila를 이용해 FTP 방식으로 AWS에 WAR 전달
+4. AWS Tomcat에 WAR 올려 BackEnd 배포 완료.
