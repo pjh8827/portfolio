@@ -15,9 +15,9 @@
 
 
 ## Kakao Map Rest-API를 호출하기 위해 Build를 해주는 클래스
-com.ndy.api.KakaoRestAPI
+com.map.api.KakaoRestAPI
 
 
 
 ## Kakao Map Rest-API를 호출하는 클래스
-com.ndy.api.KakaoRestAPIExecutor
+com.map.api.KakaoRestAPIExecutor
