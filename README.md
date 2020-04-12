@@ -73,7 +73,7 @@
 
 **Django** ![django](https://img.shields.io/badge/django-2.2.7-yellow?logo=django)
 
-[ref]: https://github.com/pjh8827/Portfolio/tree/master/Simbongsa/back_end
+[심봉사 상세보기](https://github.com/pjh8827/Portfolio/tree/master/Simbongsa)
 
 
 
