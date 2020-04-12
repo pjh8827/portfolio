@@ -239,6 +239,15 @@ Map Class Diagram
 
 --------------------
 
+JWT Generate Sequence Diagram
+
+
+
+사용한 곳
+
+> 1. 회원 인증 처리
+> 2. 비밀번호 변경
+
 
 
 참조 글 : https://www.javainuse.com/spring/boot-jwt
