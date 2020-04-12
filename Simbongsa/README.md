@@ -22,7 +22,7 @@
 
 **DB ERD** 
 
-
+!(DB_ERD)(https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/readme_img/ERD.png)
 
 
 
