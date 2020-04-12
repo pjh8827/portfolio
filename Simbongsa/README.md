@@ -37,7 +37,7 @@ Member Sequence Diagram
 
 Member Class Diagram
 
-![Class Diagram](https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/readme_img/RestApi_sample.PNG?raw=true)
+![Class Diagram](https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/readme_img/Main%20Class%20Diagram.PNG?raw=true)
 
 
 ## Map Open API
