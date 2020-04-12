@@ -73,8 +73,6 @@
 
 **MySQL** ![mysql](https://img.shields.io/badge/mysql-8.0.19-blue?logo=mysql)
 
-**Django** ![django](https://img.shields.io/badge/django-2.2.7-yellow?logo=django)
-
 [심봉사 상세보기](https://github.com/pjh8827/Portfolio/tree/master/Simbongsa)
 
 
