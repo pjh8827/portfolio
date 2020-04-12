@@ -22,7 +22,7 @@
 
 **DB ERD** 
 
-![DB_ERD](https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/readme_img/ERD.png)
+![DB_ERD](https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/readme_img/ERD.png?raw=true)
 
 
 
@@ -31,30 +31,11 @@
 
 (회원, 게시글, 댓글, 봉사활동)
 
-* 충북대 개발 동아리 PDA_Pro : 알고리즘 파트원
+Member Sequence Diagram
 
-2016
+![Sequence Diagram](https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/readme_img/Main%20Rest%20API.png?raw=true)
 
-* 충북대 개발 동아리 PDA_Pro : 동아리 회장
-* 해외 인턴십 : 필리핀 올티가스 화상영어센터 IT Manager (Since 2017.08)
-
-2017
-
-* 충북대 교내 멘토링 : 알고리즘 멘토
-* 지역선도대학 코딩경진대회 : 우수상
-* 서울어코드 코딩경진대회 : 우수상
-
-2018
-
-* 특허출원 : 운전자 폭력 감지 시스템 및 운전자 폭력 감지 방법 (출원번호:  10-2018-0102479 )
-* 논문발표 : 운전 상태 감시 시스템 (중소기업 융합학회 2018 추계종합학술대회-제1저자)
-* 소프트웨어등록 :  차량 운전자 상태 감시 시스템 (한국저작권위원회) 
-* N-Tech Service 입사 (Since 2019.04)
-
-2019
-
-* 삼성 SW 청년 아카데미 참여 (진행 중)
-* 심봉사(봉사활동 SNS) 개발
+Member Class Diagram
 
 
 
