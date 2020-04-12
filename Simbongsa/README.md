@@ -5,22 +5,22 @@
 
 > [DB 설계](#DB-설계)
 >
-> [Main Rest API 스켈레톤 생성](#Main-Rest-API)
+> [Main Rest API성](#Main-Rest-API)
 >
-> KakaoMap Rest API 생성 (맵 위도, 경도 추가용)
+> [Map Rest API 생성](#Map-Rest-API-생성)
 >
-> JWT 인증 시퀀스
+> [JWT 인증 시퀀스](#JWT-인증-시퀀스)
 >
-> Oauth 인증 시퀀스
+> [Oauth 인증 시퀀스](#Oauth-인증-시퀀스)
 >
-> AWS에 도커로 이미지화 작업 및 배포
+> [AWS에 도커로 이미지화 작업 및 배포](#AWS에-도커로-이미지화-작업-및-배포)
 
 -------------------     ----------------------------
 
 ## DB 설계
 ---------
 
-**충북대학교  (ChungBuk National University)** 
+**DB ERD** 
 
 소프트웨어학과 (Software Engineering)
 
@@ -58,7 +58,8 @@
 
 
 
-취득 자격증 / 어학
+
+## Map Rest API 생성
 ----------
 
 **취득자격증** : 정보처리기사
@@ -67,7 +68,7 @@
 
 
 
-기술경험 (프로젝트 : 심봉사)
+## JWT 인증 시퀀스
 --------------------
 
 **Spring Boot** ![spring boot](https://img.shields.io/badge/spring_boot-2.2.4-Green?logo=spring )
@@ -86,7 +87,7 @@
 
 
 
-그 외 공부모음
+## Oauth 인증 시퀀스
 ----------------------------------------
 
 * 자료구조
@@ -95,3 +96,5 @@
 * 알고리즘
 * 자바
 
+## AWS에 도커로 이미지화 작업 및 배포
+----------------------------------------
