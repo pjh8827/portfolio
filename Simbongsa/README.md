@@ -5,9 +5,9 @@
 
 > [DB 설계](#DB-설계)
 >
-> [Main Rest API성](#Main-Rest-API)
+> [Main Rest API](#Main-Rest-API)
 >
-> [Map Rest API 생성](#Map-Rest-API-생성)
+> [Map Rest API](#Map-Rest-API)
 >
 > [JWT 인증 시퀀스](#JWT-인증-시퀀스)
 >
@@ -59,7 +59,7 @@
 
 
 
-## Map Rest API 생성
+## Map Rest API
 ----------
 
 **취득자격증** : 정보처리기사
