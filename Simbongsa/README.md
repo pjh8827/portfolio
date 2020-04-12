@@ -5,7 +5,7 @@
 
 > [DB 설계](#DB-설계)
 >
-> [Main Rest API 스켈레톤 생성 (회원, 게시글, 댓글, 봉사활동)](#Main-Rest-API-스켈레톤-생성-(회원,-게시글,-댓글,-봉사활동))
+> [Main Rest API 스켈레톤 생성](#Main-Rest-API)
 >
 > KakaoMap Rest API 생성 (맵 위도, 경도 추가용)
 >
@@ -26,10 +26,10 @@
 
 
 
-## Main Rest API 스켈레톤 생성 (회원, 게시글, 댓글, 봉사활동)
+## Main Rest API
 ---------
 
-2015 
+(회원, 게시글, 댓글, 봉사활동)
 
 * 충북대 개발 동아리 PDA_Pro : 알고리즘 파트원
 
