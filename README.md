@@ -28,6 +28,7 @@
 
 * 충북대 개발 동아리 PDA_Pro : 동아리 회장
 * 해외 인턴십 : 필리핀 올티가스 화상영어센터 IT Manager (Since 2017.08)
+[Internship](https://github.com/pjh8827/Portfolio/blob/master/etc/Internship.png?raw=true)
 
 2017
 
@@ -39,6 +40,7 @@
 
 * 특허출원 : 운전자 폭력 감지 시스템 및 운전자 폭력 감지 방법 (출원번호:  10-2018-0102479 )
 * 논문발표 : 운전 상태 감시 시스템 (중소기업 융합학회 2018 추계종합학술대회-제1저자)
+[논문](https://github.com/pjh8827/Portfolio/blob/master/etc/%ED%95%99%EC%82%AC_%EB%85%BC%EB%AC%B8.pdf)
 * 소프트웨어등록 :  차량 운전자 상태 감시 시스템 (한국저작권위원회) 
 * N-Tech Service 입사 (Since 2019.04)
 
@@ -71,18 +73,6 @@
 
 **MySQL** ![mysql](https://img.shields.io/badge/mysql-8.0.19-blue?logo=mysql)
 
-**Django** ![django](https://img.shields.io/badge/django-2.2.7-yellow?logo=django)
-
 [심봉사 상세보기](https://github.com/pjh8827/Portfolio/tree/master/Simbongsa)
 
-
-
-그 외 공부모음
-----------------------------------------
-
-* 자료구조
-* 네트워크
-* 데이터베이스
-* 알고리즘
-* 자바
 
