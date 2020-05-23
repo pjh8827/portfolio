@@ -1,0 +1,35 @@
+#header-wrap{
+    position : relative;
+    height : 150px;
+    #header-title{
+        position : relative;
+        font-size : 50px;
+        top: 20px;
+        left : 80px;
+        width: 300px;
+        cursor: pointer;
+        text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+    }
+    #header-sub-title{
+        position : relative;
+        left : -30px;
+        font-size : 11px;
+        width: 220px;
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    }
+    #header-search{
+        position: absolute;
+        top : 0;
+        left : 380px;
+        z-index: 1;
+        width : 40vw;
+    }
+    #header-category{
+        position: absolute;
+        top: 60px;
+        left : 370px;
+        width: 640px;
+        margin : 0 auto;
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    }
+}

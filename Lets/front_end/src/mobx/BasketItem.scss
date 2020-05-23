@@ -1,0 +1,24 @@
+.BasketItem {
+  display: flex;
+  width: 100%;
+  .name {
+    flex: 2;
+  }
+  .price {
+    flex: 1;
+  }
+  .count {
+    flex: 1;
+  }
+  .return {
+    margin-left: auto;
+    color: #f06595;
+    cursor: pointer;
+  }
+  .return:hover {
+    text-decoration: underline;
+  }
+  + .BasketItem {
+    margin-top: 1rem;
+  }
+}

@@ -1,0 +1,26 @@
+.map-page{
+    position : relative;
+    .header{
+        position: relative;
+        top : 10px;
+        z-index: 1;
+    }
+    .map-area{
+        position: absolute;
+        top : 0px;
+        left : 0px;
+        width: 100vw;
+        height: 100vh;
+        z-index: 0;
+    }
+    .list-area{
+        position: relative;
+        left : 10px;
+        width : 310px;
+        border-radius: 20px;
+        background-color: white;
+        padding-left: 10px;
+        padding-right: 10px;
+        z-index: 1;
+    }
+}

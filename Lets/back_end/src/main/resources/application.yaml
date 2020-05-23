@@ -1,0 +1,27 @@
+server:
+  port: 8080
+  
+logging:
+  level:
+    org.springframework.web: ERROR
+    com.ssafy: DEBUG    
+  pattern:
+    console: "%d{HH:mm:ss} %clr(%5p) [%c] %m%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    
+spring:
+  datasource:
+    url: jdbc:mysql://k02a1011.p.ssafy.io/g_money_dummy?autoReconnect=true
+    username: root
+    password: ssafytest
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: false
+jwt:
+  secret: 1q2w3e4r!@
