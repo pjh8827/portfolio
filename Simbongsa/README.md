@@ -403,3 +403,4 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 2. AWS에 Tomcat 설치 -> Tomcat 구동
 3. 로컬에서 Filzila를 이용해 FTP 방식으로 AWS에 WAR 전달
 4. AWS Tomcat에 WAR 올려 BackEnd 배포 완료.
+

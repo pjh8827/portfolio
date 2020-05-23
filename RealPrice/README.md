@@ -1,5 +1,4 @@
-# **Real Price** - SSAFY Bigdata project 
-
+# **Real Price** 
 ## **기술스택**
 
 ![vue](https://img.shields.io/badge/vue-4.3.0-blue?logo=Vue.js)![javascript](https://img.shields.io/badge/javascript-es6-yellowgreen?logo=javascript)
@@ -8,9 +7,6 @@
 ![mysql](https://img.shields.io/badge/mysql-8.0.19-success?logo=mysql)
 
 ## 테스트 
-
- - Web Site Address
-   http://i02a206.p.ssafy.io 
 
  - User
 
@@ -150,4 +146,3 @@
 
 - Visual Studio Code 
 - MySQL Workbench
-- git(git bash) / gitlab(lab.ssafy.com) / jira (jira.ssafy.com)
