@@ -68,7 +68,9 @@
 
 - 위치기반 식당 추천 웹서비스
 > 기간 :2020.03~2020.04
+>
 > 역할 : Django Framwork를 기반으로한 서버개발, 보안 인증 부분 개발, DB 인덱싱  
+>
 > URL : https://github.com/pjh8827/Portfolio/tree/master/RealPrice
 
 - 봉사활동 신청 & SNS 웹서비스
