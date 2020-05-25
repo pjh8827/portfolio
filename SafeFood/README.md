@@ -116,6 +116,7 @@
 제목과 내용으로 검색 가능
 ### 공지사항 검색 - 제목
 <img src="https://github.com/pjh8827/Portfolio/blob/master/SafeFood/image/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD%20%EC%A0%9C%EB%AA%A9%EA%B2%80%EC%83%89.PNG?raw=true">
+
 ### 공지사항 검색 - 내용
 <img src="https://github.com/pjh8827/Portfolio/blob/master/SafeFood/image/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD%20%EB%82%B4%EC%9A%A9%EA%B2%80%EC%83%89.PNG?raw=true">
 
