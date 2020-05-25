@@ -59,8 +59,35 @@
 **어학** : IH(OPIC) 
 
 
+프로젝트 경험
+--------------------
+- 경기지역화폐 가맹점 위치서비스 
+기간 : 2020.04 ~ 진행중
+역할 : Spring Framework을 기반으로한 Spring MVC 패턴 서버개발, 팀장으로 프로젝트 형상관리
+URL : https://github.com/pjh8827/Portfolio/tree/master/Lets
 
-기술경험 
+- 위치기반 식당 추천 웹서비스
+기간 :2020.03~2020.04
+역할 : Django Framwork를 기반으로한 서버개발, 보안 인증 부분 개발, DB 인덱싱  
+URL : https://github.com/pjh8827/Portfolio/tree/master/RealPrice
+
+- 봉사활동 신청 & SNS 웹서비스
+기간 : 2019.11 ~ 2020.02
+역할 : Spring Framework을 기반으로한 Spring MVC 패턴 서버개발, 고가용성, 로드밸런싱 기능 추가, 보안 인증 담당.
+URL : https://github.com/pjh8827/Portfolio/tree/master/Simbongsa
+
+- 안전먹거리 조회 웹서비스
+기간 : 2019.07 ~ 2019.10
+역할 : Eclipse를 기반으로한 MVC 패턴 서버개발. 
+URL : https://github.com/pjh8827/Portfolio/tree/master/SafeFood
+
+- 운전상태 감시 시스템 개발 
+기간 : 2017.09 ~ 2018.10
+역할 : 딥러닝을 통해 서버 학습, 영상처리 알고리즘 적용
+URL : https://github.com/pjh8827/Portfolio/blob/master/etc/%ED%95%99%EC%82%AC_%EB%85%BC%EB%AC%B8.pdf
+
+
+기술스택 
 --------------------
 
 **Spring Boot** ![spring boot](https://img.shields.io/badge/spring_boot-2.2.4-Green?logo=spring )
@@ -72,6 +99,8 @@
 **Mybatis** ![mybatis](https://img.shields.io/badge/mabatis-2.1.1-black ) 
 
 **MySQL** ![mysql](https://img.shields.io/badge/mysql-8.0.19-blue?logo=mysql)
+
+**Django**
 
 
 
