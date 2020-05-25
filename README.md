@@ -72,19 +72,19 @@ URL : https://github.com/pjh8827/Portfolio/tree/master/Lets
 URL : https://github.com/pjh8827/Portfolio/tree/master/RealPrice
 
 - 봉사활동 신청 & SNS 웹서비스
-기간 : 2019.11 ~ 2020.02
-역할 : Spring Framework을 기반으로한 Spring MVC 패턴 서버개발, 고가용성, 로드밸런싱 기능 추가, 보안 인증 담당.
-URL : https://github.com/pjh8827/Portfolio/tree/master/Simbongsa
+- 기간 : 2019.11 ~ 2020.02
+- 역할 : Spring Framework을 기반으로한 Spring MVC 패턴 서버개발, 고가용성, 로드밸런싱 기능 추가, 보안 인증 담당.
+- URL : https://github.com/pjh8827/Portfolio/tree/master/Simbongsa
 
 - 안전먹거리 조회 웹서비스
-기간 : 2019.07 ~ 2019.10
-역할 : Eclipse를 기반으로한 MVC 패턴 서버개발. 
-URL : https://github.com/pjh8827/Portfolio/tree/master/SafeFood
+- 기간 : 2019.07 ~ 2019.10
+- 역할 : Eclipse를 기반으로한 MVC 패턴 서버개발. 
+- URL : https://github.com/pjh8827/Portfolio/tree/master/SafeFood
 
 - 운전상태 감시 시스템 개발 
-기간 : 2017.09 ~ 2018.10
-역할 : 딥러닝을 통해 서버 학습, 영상처리 알고리즘 적용
-URL : https://github.com/pjh8827/Portfolio/blob/master/etc/%ED%95%99%EC%82%AC_%EB%85%BC%EB%AC%B8.pdf
+- 기간 : 2017.09 ~ 2018.10
+- 역할 : 딥러닝을 통해 서버 학습, 영상처리 알고리즘 적용
+- URL : https://github.com/pjh8827/Portfolio/blob/master/etc/%ED%95%99%EC%82%AC_%EB%85%BC%EB%AC%B8.pdf
 
 
 기술스택 
