@@ -6,7 +6,6 @@
 봉사활동을 신청하기 위해 오프라인으로 직접 뛰어다니던 수고를 덜어주기 위한 웹 서비스.
 국가 인증 봉사활동들을 지도, 리스트, 달력의 형태로 다양하게 찾아서 온라인으로 신청할 수 있는 웹 서비스.
 친구들과 함께 신청할 수 있도록 SNS 특성을 갖는 웹 서비스.
-![이미지](https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/%EA%B4%80%EB%A0%A8%20%EC%9E%90%EB%A3%8C/img1.png?raw=true)
 ![이미지](https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/%EA%B4%80%EB%A0%A8%20%EC%9E%90%EB%A3%8C/img2.png?raw=true)
 ![이미지](https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/%EA%B4%80%EB%A0%A8%20%EC%9E%90%EB%A3%8C/img3.png?raw=true)
 ![이미지](https://github.com/pjh8827/Portfolio/blob/master/Simbongsa/%EA%B4%80%EB%A0%A8%20%EC%9E%90%EB%A3%8C/img4.png?raw=true)
