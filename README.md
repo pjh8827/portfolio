@@ -60,7 +60,7 @@
 
 
 
-기술경험 (프로젝트 : 심봉사)
+기술경험 
 --------------------
 
 **Spring Boot** ![spring boot](https://img.shields.io/badge/spring_boot-2.2.4-Green?logo=spring )
@@ -73,6 +73,5 @@
 
 **MySQL** ![mysql](https://img.shields.io/badge/mysql-8.0.19-blue?logo=mysql)
 
-[심봉사 상세보기](https://github.com/pjh8827/Portfolio/tree/master/Simbongsa)
 
 
