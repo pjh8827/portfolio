@@ -42,13 +42,11 @@
 * 논문발표 : 운전 상태 감시 시스템 (중소기업 융합학회 2018 추계종합학술대회-제1저자)
 [논문](https://github.com/pjh8827/Portfolio/blob/master/etc/%ED%95%99%EC%82%AC_%EB%85%BC%EB%AC%B8.pdf)
 * 소프트웨어등록 :  차량 운전자 상태 감시 시스템 (한국저작권위원회) 
-* N-Tech Service 입사 (Since 2019.04)
+* N-Tech Service 입사
 
 2019
-
-* 삼성 SW 청년 아카데미 참여 (진행 중)
-* 심봉사(봉사활동 SNS) 개발
-
+* N-Tech Service 퇴사 (2019.04)
+* 삼성 SW 청년 아카데미 참여 (2019.07~진행 중)
 
 
 취득 자격증 / 어학
