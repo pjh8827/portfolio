@@ -110,7 +110,7 @@
 
 **MySQL** ![mysql](https://img.shields.io/badge/mysql-8.0.19-blue?logo=mysql)
 
-**Django**
+**Django** ![django](https://img.shields.io/badge/django-2.2.7-yellow?logo=django)
 
 
 
