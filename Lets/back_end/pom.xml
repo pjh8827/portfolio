@@ -9,7 +9,7 @@
 		<version>2.1.14.RELEASE</version>
 		<relativePath />
 	</parent>
-	<groupId>com.ssafy</groupId>
+	<groupId>pjh</groupId>
 	<artifactId>test</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>test</name>
