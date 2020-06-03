@@ -108,7 +108,6 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "realpricedb",
         "USER": "root",
-        "PASSWORD": "ssafy",
         "HOST": "13.125.68.33", #AWS
         "PORT": "3306",
         "OPTIONS": {"charset": "utf8mb4"},
