@@ -22,5 +22,3 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: false
-jwt:
-  secret: 1q2w3e4r!@
