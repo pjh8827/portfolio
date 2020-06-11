@@ -6,22 +6,18 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.14.RELEASE</version>
+		<version>2.1.4.RELEASE</version>
 		<relativePath />
 	</parent>
-	<groupId>pjh</groupId>
-	<artifactId>test</artifactId>
+	<groupId>com.ssafy</groupId>
+	<artifactId>lets</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>test</name>
-	<description>Demo project for Spring Boot</description>
-
+	<name>LetsGG</name>
+	<description>Gyeonggi Local Exchange Trading System</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-
 	<dependencies>
-	
-		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -35,22 +31,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -66,7 +58,6 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -77,7 +68,6 @@
 			<version>0.9.1</version>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<plugins>
@@ -87,5 +77,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

@@ -7,73 +7,49 @@ export const getMerchantList = async () => { // back end 연결 후 async 추가
   try {
     const response = await axios.get(`${baseUrl}/merchants`);
     return response.data;
-    // return [
-    //   {
-    //     brnhstrmMnyUsePosblYn: null,
-    //     cardMnyUsePosblYn: null,
-    //     category: null,
-    //     cmpnmNm: "발레나라2",
-    //     id: 1,
-    //     latitude: "37.673069059",
-    //     longitude: "126.80090346",
-    //     mobileMnyUsePosblYn: null,
-    //     refineLotnoAddr: "",
-    //     refineRoadnmAddr: "경기도 고양시 일산동구 숲속마을2로 113",
-    //     refineZipCd: "10303",
-    //     regionMnyNm: "고양시",
-    //     sigun: "1",
-    //     telno: "031-904-9822",
-    //   },{
-    //     brnhstrmMnyUsePosblYn: null,
-    //     cardMnyUsePosblYn: null,
-    //     category: "1",
-    //     cmpnmNm: "무교동낙지이야기",
-    //     id: 2,
-    //     latitude: "37.670753419",
-    //     longitude: "127.50414429",
-    //     mobileMnyUsePosblYn: null,
-    //     refineLotnoAddr: "",
-    //     refineRoadnmAddr: "경기도 가평군 설악면 한서로124번길 12",
-    //     refineZipCd: "12464",
-    //     regionMnyNm: "가평군",
-    //     sigun: "2",
-    //     telno: "070-7796-7036",
-    //   },{
-    //     brnhstrmMnyUsePosblYn: null,
-    //     cardMnyUsePosblYn: null,
-    //     category: null,
-    //     cmpnmNm: "윤선생영어교실",
-    //     id: 3,
-    //     latitude: "37.653572719",
-    //     longitude: "126.79096142",
-    //     mobileMnyUsePosblYn: null,
-    //     refineLotnoAddr: "",
-    //     refineRoadnmAddr: "경기도 고양시 일산동구 강촌로 157",
-    //     refineZipCd: "10417",
-    //     regionMnyNm: "고양시",
-    //     sigun: "1",
-    //     telno: "031-903-0002",
-    //   }
-    // ];
   } catch (error) {
     return error;
   }
 };
 
-export const getMerchantListByCategory = async (category : string) =>{
-  try{
-    const response = await axios.get(`${baseUrl}/categories/${category}`);
-    return response.data;
-  }catch(error){
+export const getMerchantListByCategory = async (category: string, currentLatLong: [number, number], topRightLatLong: [number, number], bottomLeftLatLong: [number, number], page: number, pageSize: number) => {
+  try {
+    // /merchants-by-category/{categoryType}/{bottomLeftLatitude}/{topRightLatitude}/{bottomLeftLongitude}/{topRightLongitude}/{page}/{size}
+    const urlFormat = [`${baseUrl}/merchants-by-category/${category}/${currentLatLong[0]}/${currentLatLong[1]}/${bottomLeftLatLong[0]}/${topRightLatLong[0]}/${bottomLeftLatLong[1]}/${topRightLatLong[1]}/`
+      , `/${pageSize}`];
+    const response = await axios.get(`${urlFormat[0]}${page}${urlFormat[1]}`);
+    return [urlFormat, response.data];
+  } catch (error) {
     throw error;
   }
 }
 
-export const getMerchantListBySearch = async (searchInput : string) =>{
-  try{
-    const response = await axios.get(`${baseUrl}/merchants/${searchInput}`);
+export const getMerchantListBySearch = async (searchInput: string, currentLatLong: [number, number], topRightLatLong: [number, number], bottomLeftLatLong: [number, number], page: number, pageSize: number) => {
+  try {
+    // console.log('aaaaaaaaaaaaa');
+    // console.log(currentLatLong);
+    // console.log(topRightLatLong);
+    // console.log(bottomLeftLatLong);
+    // console.log(pageSize);
+    // console.log(page);
+    const urlFormat = [`${baseUrl}/merchants-by-name/${searchInput}/${currentLatLong[0]}/${currentLatLong[1]}/${bottomLeftLatLong[0]}/${topRightLatLong[0]}/${bottomLeftLatLong[1]}/${topRightLatLong[1]}/`
+      , `/${pageSize}`];
+    // console.log('bbbbbbbbbbbbbb');
+
+    const response = await axios.get(`${urlFormat[0]}${page}${urlFormat[1]}`);
+    return [urlFormat, response.data];
+  } catch (error) {
+    // console.log(error);
+    throw error;
+  }
+}
+
+export const changePage = async (prevUrlFormat: [string, string], page: number) => {
+  try {
+    const url = `${prevUrlFormat[0]}${page}${prevUrlFormat[1]}`;
+    const response = await axios.get(url);
     return response.data;
-  }catch(error){
+  } catch (error) {
     throw error;
   }
 }

@@ -1,8 +1,9 @@
-export default ()=>{
-    if( process.env.NODE_ENV == 'production' ) {
-        return "http://k02a1011.p.ssafy.io:8080/api";
-    } else if( process.env.NODE_ENV == 'development' ){
-        return "http://localhost:8080/api";
+export default () => {
+    if (process.env.NODE_ENV === 'production') {
+        return "https://letsgg.site/api";
+    } else if (process.env.NODE_ENV === 'development') {
+        return "https://letsgg.site/api";
+        // return "https://k02a1011.p.ssafy.io/api";
     }
-    return "http://localhost:8080/api";
+    return "https://letsgg.site:8081/api";
 };

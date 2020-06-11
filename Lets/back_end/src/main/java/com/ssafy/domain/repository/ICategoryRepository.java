@@ -8,6 +8,6 @@ import com.ssafy.domain.Category;
 
 public interface ICategoryRepository extends CrudRepository<Category, Long>{
 
-	List<Category> findByCateBigLike(String cateBig);
-	
+	List<Category> findByMapper(String mapper);
+
 }

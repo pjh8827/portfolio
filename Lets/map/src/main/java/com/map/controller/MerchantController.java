@@ -52,6 +52,7 @@ public class MerchantController {
 	public ResponseEntity<Map<String, Object>> getMerchant() {
 		try {
 			List<Merchant> MerchantList = service.searchAll();
+			Merchant change = new Merchant();
 			for (Merchant merchant : MerchantList) {
 				if (merchant.getLatitude() == null || merchant.getLongitude() == null) {
 					String address2 = merchant.getRefine_roadnm_addr();
@@ -80,11 +81,13 @@ public class MerchantController {
 					merchant.setLatitude(address_lat);
 					merchant.setLongitude(address_lng);
 					service.update(merchant);
+					change = merchant;
+					break;
 				}else {
 					System.out.println("개꿀 ");
 				}
 			}
-			return response(MerchantList, true, HttpStatus.OK);
+			return response(change, true, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("가맹점리스트조회실패", e);
 			return response(e.getMessage(), false, HttpStatus.CONFLICT);

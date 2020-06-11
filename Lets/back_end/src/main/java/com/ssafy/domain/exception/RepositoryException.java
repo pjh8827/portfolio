@@ -1,7 +1,8 @@
 package com.ssafy.domain.exception;
 
 public class RepositoryException extends RuntimeException {
-	static final long serialVersionUID = 1;
+	
+	private static final long serialVersionUID = 5165424946378528866L;
 
 	public RepositoryException(Throwable throwable, String msg) {
 		super(msg, throwable);
@@ -14,5 +15,4 @@ public class RepositoryException extends RuntimeException {
 	public RepositoryException(Throwable throwable) {
 		super(throwable);
 	}
-
 }

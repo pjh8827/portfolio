@@ -2,52 +2,52 @@ import React, { ReactElement, MouseEvent } from 'react'
 import categoryIcon from 'assets/images/categoryIcon.png'
 import 'components/category/category.scss';
 import { inject, observer } from "mobx-react";
-
+import ReactGA from 'react-ga';
 interface Props {
-    searchMerchantByCategory? : (category: string)=>void
+    searchMerchantByCategory?: (category: string, currentLatLong: [number, number], topRightLatLong: [number, number], bottomLeftLatLong: [number, number], page: number, pageSize: number) => void;
+    currentLatLong?: [number, number];
+    currentBound?: { bottomLeftLatLong: [number, number], topRightLatLong: [number, number] };
 }
 
-function Category({searchMerchantByCategory}: Props): ReactElement {
-    const handleIconClick = (event : any) =>{
+function Category({ searchMerchantByCategory, currentLatLong, currentBound }: Props): ReactElement {
+    const handleIconClick = (event: any) => {
+        // 여기부터
         const className = event.target.className;
+        const classes: string[] = className.split(' ');
         let category = "";
-        if(className.includes('item1')){
-            category = "음식";
-        }else if(className.includes('item2')){
-            category = "유통업";
-        }else if(className.includes('item3')){
-            category = "연료";
-        }else if(className.includes('item4')){
-            category = "학원";
-        }else if(className.includes('item5')){
-            category = "병원";
-        }else if(className.includes('item6')){
-            category = "의료";
-        }else if(className.includes('item7')){
-            category = "레저";
-        }else if(className.includes('item8')){
-            category = "보건";
-        }
-        if(category !== ""){
-            searchMerchantByCategory!(category);
+        classes.forEach((c: string) => {
+            if (c.includes('item')) {
+                let idx = parseInt(c.split('item')[1]);
+                category = cateList[idx];
+            }
+        });
+        // 여기까지 카테고리 찾기
+        if (category !== "") {
+            // console.log(category);
+            searchMerchantByCategory!(category, currentLatLong!, currentBound!.topRightLatLong, currentBound!.bottomLeftLatLong, 1, 20);
         }
     }
+    const cateList: string[] = ["음식점", "편의점", "주유소", "학원", "병원", "레저업소", "보건위생", "기타"];
+
     return (
-        <div id="category" onClick={handleIconClick}>
-            <div className="menu item1"><div className="item-title">음식점</div></div>
-            <div className="menu item2"><div className="item-title">편의점</div></div>
-            <div className="menu item3"><div className="item-title">주유소</div></div>
-            <div className="menu item4"><div className="item-title">학원</div></div>
-            <div className="menu item5"><div className="item-title">병원</div></div>
-            <div className="menu item6"><div className="item-title">기타의료기관</div></div>
-            <div className="menu item7"><div className="item-title">레저업소</div></div>
-            <div className="menu item8"><div className="item-title">보건위생</div></div>
+        <div id="category">
+            {cateList.map((category, idx) => {
+                return (
+                    <div className={`menu item${idx}`} key={idx} onClick={(event: any) => {
+                        handleIconClick(event);
+                        ReactGA.ga('send', 'event', 'event_category', category, 'event_label');
+                    }}>
+                        <div className="item-title">{category}</div>
+                    </div>
+                )
+            })}
         </div>
     )
 }
 
 
-export default inject(({ merchant }) => ({
-    searchMerchantByCategory : merchant.searchMerchantByCategory,
-  }))(observer(Category));
-  
+export default inject(({ merchant, letsMap }) => ({
+    searchMerchantByCategory: merchant.searchMerchantByCategory,
+    currentLatLong: letsMap.currentLatLong,
+    currentBound: letsMap.currentBound,
+}))(observer(Category));

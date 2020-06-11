@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -8,17 +8,26 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import { red, yellow, amber } from '@material-ui/core/colors';
+import { withStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import 'components/storecard/storecard.scss';
+import { inject, observer } from "mobx-react";
+import categoryImage from 'assets/images/category_small.png';
+import PhoneDisabledIcon from '@material-ui/icons/PhoneDisabled';
+import PhoneEnabledIcon from '@material-ui/icons/PhoneEnabled';
+import ReactGA from 'react-ga';
+import { MerchantType } from 'stores/merchant';
+
+import ClipboardJS from 'clipboard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    // maxWidth: 345,
   },
   media: {
     height: 0,
@@ -36,88 +45,164 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: red[500],
+    width: 60,
+    height: 60
   },
 }));
 
-export interface StoreType{
-  brnhstrmMnyUsePosblYn: string,
-  cardMnyUsePosblYn: string,
-  category: string,
-  cmpnmNm: string,
-  id: number,
-  latitude: string,
-  longitude: string,
-  mobileMnyUsePosblYn: string,
-  refineLotnoAddr: string,
-  refineRoadnmAddr: string,
-  refineZipCd: string,
-  regionMnyNm: string,
-  sigun: string,
-  telno: string,
+// bd에서는 cate_small과같이 스네이크 케이스, 
+// 프로젝트상에서는 카멜케이스(스프링)
+interface Category {
+  id: string,
+  cateBig: string,
+  cateSmall: string,
+}
+
+interface Sigun {
+  id: string,
+  doNm: string,
+  sigunNm: string,
 }
 
 interface Props {
-  store: StoreType,
+  store: MerchantType,
+  isCategoryAndListVisible?: boolean;
+  setIsCategoryAndListVisible?: (value: boolean) => {};
+  expanded: boolean;
+  clickedMerchant?: MerchantType;
+  setCurrentLatLong?: (latLong: [number, number]) => {};
+  refs?: { [key: string]: any };
+  merchants?: MerchantType[];
+
+
 }
 
+export const BlackButton = withStyles((theme) => ({
+  root: {
+    color: theme.palette.getContrastText("#000000"),
+    backgroundColor: "#000000",
+    '&:hover': {
+      backgroundColor: "#000000",
+    },
+  },
+}))(Button);
 
-export default function StoreCard({store} : Props) {
+function StoreCard({ merchants, refs, store, isCategoryAndListVisible, setIsCategoryAndListVisible, expanded, clickedMerchant, setCurrentLatLong }: Props) {
+  const [clipboard, setClipboard] = useState<ClipboardJS>();
+  useEffect(() => {
+    const clip = new ClipboardJS('#address');
+    setClipboard(clip);
+    return () => {
+      if(!!clipboard){
+        clipboard!.destroy();
+      }
+    }
+  }, [])
+  const [isAddressMouseOver, setIsAddressMouseOver] = useState(false);
+  const [isAddressClicked, setIsAddressClicked ] = useState(false);
+
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  // a링크 걸기위한 변수
+  const mapSearchUrl = `https://map.kakao.com/?q=${store.refineRoadnmAddr}`;
+  const noneDashedTelno = store.telno.replace(/-/g, "");
+  const telHref = `tel:${noneDashedTelno}`
+  const handleShowMapClick = () => {
+    setTimeout(() => {
+      // console.log("ref[id]")
+      console.log("제발되라");
+      // console.log(refs![clickedMerchant!.id].current)
+      refs![merchants![0].id].current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      });
+    }, 100);
+    setTimeout(() => {
+      const lat = parseFloat(clickedMerchant!.latitude);
+      const long = parseFloat(clickedMerchant!.longitude);
+      // console.log(lat,long);
+      setCurrentLatLong!([lat, long]);
+      setIsCategoryAndListVisible!(!isCategoryAndListVisible);      
+    }, 200);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
   };
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded);
+  // };
+  // console.log(categoryImage);
+  const myImage = new Image();
+  myImage.src = categoryImage;
+
+  const cateList: string[] = ["편의점", "주유소", "학원", "병원", "기타의료기관", "레저업소", "보건위생", "음식점"];
+  const telnoButton = (telno: string): any => {
+    var regExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+    if (!regExp.test(telno)) {
+      return <PhoneDisabledIcon></PhoneDisabledIcon>
+    }
+    return <a href={`tel:${noneDashedTelno}`}><PhoneEnabledIcon></PhoneEnabledIcon></a>
+  }
+
+  const handleAddressMouseOver = () => {
+    setIsAddressMouseOver(true);
+  }
+  const handleAddressMouseOut = () => {
+    setIsAddressMouseOver(false);
+  }
+
+  const handleAddressClick = () =>{
+    setIsAddressClicked(true);
+    setTimeout(()=>{
+      setIsAddressClicked(false);
+    },1500);
+  }
 
   return (
-    <Card className={classes.root}>
+    <Card className={`${classes.root} merchant-card-wrap`}>
       <CardHeader
+        className="card-header"
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+          <Avatar aria-label="recipe" className={classes.avatar} >
+            {/* {store.regionMnyNm} */}
+            <div className={`avatar image${store.sigunId}`}> </div>
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
         title={store.cmpnmNm}
-        subheader={store.refineRoadnmAddr}
+        // 카테고리
+        subheader={store.categoryType}
       />
-      {/* <CardMedia
-        className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
-      /> */}
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          정보
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
+      <div className="distance">
+        {store.currentDistance}
+      </div>
+
+      {/* 더보기 버튼 눌렀을때 */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
+
+          <Typography paragraph onMouseOver={handleAddressMouseOver} onMouseOut={handleAddressMouseOut} onClick={handleAddressClick}> 
+            <span className={`address-copy-success ${isAddressClicked? '' : 'hidden'}`}>주소가 복사되었습니다.</span>
+            <span id="address" data-clipboard-text={store.refineRoadnmAddr} >주소: {store.refineRoadnmAddr}</span>
+            <span className={`address-click-info ${isAddressMouseOver ? '' : 'hidden'}`}>주소 클릭시 복사</span>
+          </Typography>
+          <Typography paragraph>
+            번호: {store.telno} {telnoButton(store.telno)}
+          </Typography>
+          <ButtonGroup disableElevation variant="contained" >
+            <Button href={mapSearchUrl} target="_blank" rel="noopener noreferrer" onClick={(event: any) => ReactGA.ga('send', 'event', 'link_to_kakao_map')}>카카오 지도로 상세보기</Button>
+            <BlackButton onClick={(event: any) => { handleShowMapClick(); ReactGA.ga('send', 'event', 'list_to_lets_map') }}>현재 지도로 위치 보기</BlackButton>
+          </ButtonGroup>
+
         </CardContent>
       </Collapse>
     </Card>
   );
-}
+
+
+} export default inject(({ window, merchant, letsMap }) => ({
+  isCategoryAndListVisible: window.isCategoryAndListVisible,
+  setIsCategoryAndListVisible: window.setIsCategoryAndListVisible,
+  clickedMerchant: merchant.clickedMerchant,
+  setCurrentLatLong: letsMap.setCurrentLatLong,
+  refs: merchant.refs,
+  merchants: merchant.merchantList,
+
+
+}))(observer(StoreCard));

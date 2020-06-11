@@ -1,11 +1,10 @@
 package com.ssafy.api;
 
-import com.ssafy.api.handler.CUserNotFoundException;
+import java.util.List;
+
 import com.ssafy.domain.User;
-import com.ssafy.domain.exception.DomainException;
 import com.ssafy.domain.exception.EmptyListException;
 import com.ssafy.domain.exception.NotFoundException;
-import com.ssafy.domain.repository.IUserRepository;
 import com.ssafy.domain.service.UserService;
 
 import org.slf4j.Logger;
@@ -14,19 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.websocket.server.PathParam;
+import javax.validation.Valid;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserController {
-	public static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
 	private final UserService service;
 	
@@ -35,54 +31,49 @@ public class UserController {
 		this.service = service;
 	}
 	
-	// user 생성
-	@PostMapping(value = "/users")
-	public ResponseEntity<Void> postUser(@RequestBody User user) {
+	@PostMapping(value = "/")
+	public ResponseEntity<Void> postUser(@Valid @RequestBody User user) {
 
-		logger.debug("Calling postUser()");
+		LOGGER.debug("Calling user postUser()");
 
 		service.postUser(user);
 		
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	// user의 email로 조회
-	@GetMapping(value = "/users/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> findByEmail(@PathVariable String email) {
 
-		logger.debug("Calling findByEmail() ");
+		LOGGER.debug("Calling user findByEmail()");
 
 		User user = service.findByEmail(email);
 
-		if (user == null) {
-			logger.error("NOT FOUND email: ", email);
+		if (user == null) 
 			throw new NotFoundException(email + " 회원 정보를 찾을 수 없습니다.");
-		}
 
-		return new ResponseEntity<User>(user, HttpStatus.OK);
-
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
-	// 모든 user 조회
 	@GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<User>> findAll() {
 
-		logger.debug("Calling findAll()");
+		LOGGER.debug("Calling user findAll()");
 
 		List<User> list = service.findAll();
+		
+		if(list.isEmpty()) 
+			throw new EmptyListException("등록된 유저가 없습니다.");
 
-		return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
-	// user의 email로 삭제
-	@DeleteMapping(value = "/users/{email}")
+	@DeleteMapping(value = "/{email}")
 	public ResponseEntity<Void> deleteUser(@PathVariable String email) {
 
-		logger.debug("Calling deleteUser() ");
+		LOGGER.debug("Calling user deleteUser()");
 
 		service.deleteUser(email);
 
-		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-
 }

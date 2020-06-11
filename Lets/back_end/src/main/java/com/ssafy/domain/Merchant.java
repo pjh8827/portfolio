@@ -3,6 +3,8 @@ package com.ssafy.domain;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -12,26 +14,50 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.dto.MerchantDto;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
+@SqlResultSetMapping(
+		name="merchantDtoMapper",
+		classes = @ConstructorResult(
+				targetClass = MerchantDto.class,
+				columns = {
+                        @ColumnResult(name="id", type = Long.class),
+                        @ColumnResult(name="cmpnm_nm", type = String.class),
+                        @ColumnResult(name="refine_roadnm_addr", type = String.class),
+                        @ColumnResult(name="refine_lotno_addr", type = String.class),
+                        @ColumnResult(name="telno", type = String.class),
+                        @ColumnResult(name="region_mny_nm", type = String.class),
+                        @ColumnResult(name="brnhstrm_mny_use_posbl_yn", type = String.class),
+                        @ColumnResult(name="card_mny_use_posbl_yn", type = String.class),
+                        @ColumnResult(name="mobile_mny_use_posbl_yn", type = String.class),
+                        @ColumnResult(name="refine_zip_cd", type = String.class),
+                        @ColumnResult(name="latitude", type = String.class),
+                        @ColumnResult(name="longitude", type = String.class),
+                        @ColumnResult(name="category_id", type = Long.class),
+                        @ColumnResult(name="sigun_id", type = Long.class),
+                        @ColumnResult(name="category_type", type = String.class),
+                        @ColumnResult(name="distance", type = String.class)
+                }
+		)
+)
 @Entity
 @Getter
-@Setter
 @ToString(exclude = {"category", "sigun"})
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "makedb_merchant")
 @NamedEntityGraph(name="MerchantWithCategoryAndSigun", attributeNodes = {@NamedAttributeNode("category"), @NamedAttributeNode("sigun")})
 public class Merchant implements Serializable{
 	
 	private static final long serialVersionUID = 7645597484064897497L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
@@ -78,6 +104,8 @@ public class Merchant implements Serializable{
 	@JoinColumn(name="sigun_id", foreignKey = @ForeignKey(name = "FK_MERCHANT_SIGUN"))
 	private Sigun sigun;
 
+	@Column(name="category_type")
+	private String categoryType;
 	
 	public void setCategory(Category category) {
 		this.category = category;
@@ -88,5 +116,4 @@ public class Merchant implements Serializable{
 		this.sigun = sigun;
 		sigun.getMerchants().add(this);
 	}
-	
 }

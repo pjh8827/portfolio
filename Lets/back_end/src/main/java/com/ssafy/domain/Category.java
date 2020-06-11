@@ -1,12 +1,9 @@
 package com.ssafy.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,16 +15,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 @Entity
 @Getter
-@Setter
 @ToString
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "makedb_category")
 public class Category implements Serializable{
 	
@@ -43,8 +39,10 @@ public class Category implements Serializable{
 	@Column(name="cate_small")
 	private String cateSmall;
 	
+	@Column(name="mapper")
+	private String mapper;
+	
 	@OneToMany(mappedBy="category", fetch=FetchType.LAZY)
 	@JsonIgnore
 	private Set<Merchant> merchants = new LinkedHashSet<>();
-	
 }

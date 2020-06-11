@@ -1,7 +1,9 @@
 package com.ssafy.domain.exception;
 
 public class DomainException extends RuntimeException {
-	static final long serialVersionUID = 1;
+	
+	private static final long serialVersionUID = -4452376911733391573L;
+	
 	private String errorMessage;
 
 	public DomainException() {
@@ -25,5 +27,4 @@ public class DomainException extends RuntimeException {
 	public String getErrorMessage() {
 		return errorMessage;
 	}
-
 }

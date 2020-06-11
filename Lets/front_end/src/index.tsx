@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-
+import ReactGA from 'react-ga';
 // cookie 관련
 import { CookiesProvider } from 'react-cookie';
 
@@ -14,6 +14,10 @@ import RootStore from 'stores'; // 2. 스토어를 불러오고
 
 const root = new RootStore(); // 3. 루트 스토어 생성
 
+ReactGA.initialize('UA-168124019-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
+
+
 const theme = createMuiTheme({
   typography: {
     fontFamily: [
@@ -22,7 +26,6 @@ const theme = createMuiTheme({
     ].join(','),
   },
 });
-
 ReactDOM.render(
   // 4. Provider에 props로 넣어줌
   <CookiesProvider>

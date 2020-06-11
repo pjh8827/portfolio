@@ -3,53 +3,60 @@ package com.ssafy.domain.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.api.handler.CUserNotFoundException;
 import com.ssafy.domain.User;
+import com.ssafy.domain.exception.RepositoryException;
 import com.ssafy.domain.repository.IUserRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class UserService {
 
 	private final IUserRepository repository;
 	
-	@Transactional
 	public void postUser(User user) {
 		
-		String email = user.getEmail();
-		String password = user.getPassword();
-		
-		repository.save(new User(email, password));
+		try{
+			repository.save(user);
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
 	}
 	
-	@Transactional
 	public List<User> findAll() {
 
 		List<User> list = new ArrayList<>();
 		Iterable<User> users = repository.findAll();
 
 		users.forEach(list::add);
-
+		
+		if(list.isEmpty()) 
+			throw new RepositoryException("등록된 유저가 없습니다.");
+		
 		return list;
 	}
 	
-	@Transactional
 	public User findByEmail(String email) {
 		
-		User user = repository.findByEmail(email).orElseThrow(CUserNotFoundException::new);
-		
-		return user;
+		try {
+			return repository.findByEmail(email).orElseThrow(CUserNotFoundException::new);
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
 	}
 	
-	@Transactional
 	public void deleteUser(String email) {
-
-		repository.deleteByEmail(email);
+		
+		try {
+			repository.deleteByEmail(email);
+		} catch (Exception e) {
+			throw new RepositoryException(e, e.getMessage());
+		}
 	}
 }

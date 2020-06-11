@@ -1,4 +1,4 @@
-import React, { ReactElement, Fragment } from "react";
+import React, { ReactElement, Fragment, useState } from "react";
 import "components/header/header.scss";
 import Search from "components/search/Search";
 import Category from "components/category/Category";
@@ -7,22 +7,23 @@ interface Props { }
 
 export default function Header({ }: Props): ReactElement {
   const [cookies, setCookie, removeCookie] = useCookies(['introSkip']);
-  const handleOnClick = (event : any) =>{
+  const [ subTitleVisibleHidden, setSubTitleVisibleHidden ] = useState<string>('hidden');
+  const handleOnClick = (event: any) => {
     removeCookie('introSkip');
     window.location.href = "/";
   }
+  const handleTitleMouseOver = () => {
+    setSubTitleVisibleHidden('visible');
+  }
+  const handleTitleMouseOut = () => {
+    setSubTitleVisibleHidden('hidden');
+  }
   return (
     <Fragment>
-      <div id="header-wrap">
-          <div id="header-title" onClick={handleOnClick}>
-            LETS 경기
-          <div id="header-sub-title">Local Exchange Trading System</div>
-          </div>
-        <div id="header-search">
-          <Search />
-        </div>
-        <div id="header-category">
-          <Category />
+      <div className="header-wrap">
+        <div className={`header-title`} onClick={handleOnClick} onMouseOver={handleTitleMouseOver} onMouseOut={handleTitleMouseOut}>
+          LETS 경기
+          <div className={`header-sub-title ${subTitleVisibleHidden}`}>Local Exchange Trading System</div>
         </div>
       </div>
     </Fragment>

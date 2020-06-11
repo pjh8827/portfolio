@@ -1,7 +1,38 @@
 import { observable, action, computed } from 'mobx';
+import React from 'react';
 import * as merchantApi from 'libs/apis/merchant';
+
+export interface MerchantType {
+    brnhstrmMnyUsePosblYn: string,
+    cardMnyUsePosblYn: string,
+    categoryId: number,
+    categoryType: string,
+    cmpnmNm: string,
+    id: number,
+    latitude: string,
+    longitude: string,
+    mobileMnyUsePosblYn: string,
+    refineLotnoAddr: string,
+    refineRoadnmAddr: string,
+    refineZipCd: string,
+    regionMnyNm: string,
+    sigunId: number,
+    telno: string,
+    currentDistance: string | null,
+}
+
 export default class MerchantStore {
-    @observable merchantList = [] as any;
+    @observable merchantList = [] as MerchantType[];
+    @observable refs = {}; // 가게 리스트 위치 조정을 위한 레퍼런스
+    @observable isNoMerchants = false;
+    @observable clickedMerchant = {} as MerchantType;
+    @observable currentPage = 0;
+    @observable totalPage = 0;
+    @observable firstPage = false;
+    @observable lastPage = false;
+    @observable prevUrlFormat: [string, string] = ['', '']; // 앞스트링+페이지번호+뒤스트링 => 페이지네이션을 위한 url
+    // @observable isModalOpened = false;
+
     root: any;
 
     // *** root 등록 constructor
@@ -9,37 +40,112 @@ export default class MerchantStore {
         this.root = root;
     }
 
+    handleError = (error: any) => {
+        if (error.status === '404') {
+            console.log('404에러');
+        }
+    }
+
     @action
     updateMerchantList = async () => {
-        console.log("업데이트", this.merchantList);
-        try{
+        // console.log("업데이트", this.merchantList);
+        try {
             this.merchantList = await merchantApi.getMerchantList();
-        }catch(error){
+        } catch (error) {
             alert("서버와 통신 실패");
-            console.log(error);
+            this.handleError(error);
+            // console.log(error);
         }
-        console.log("업데이트 끝", this.merchantList);
+        // console.log("업데이트 끝", this.merchantList);
     }
 
     @action
-    searchMerchantByCategory = async (category : string) =>{
-        try{
-            this.merchantList = await merchantApi.getMerchantListByCategory(category);
-        }catch(error){
+    searchMerchantByCategory = async (category: string, currentLatLong: [number, number], topRightLatLong: [number, number], bottomLeftLatLong: [number, number], page: number, pageSize: number) => {
+        try {
+            this.clickedMerchant = {} as MerchantType;
+            const [prevUrlFormat, responseData] = await merchantApi.getMerchantListByCategory(category, currentLatLong, topRightLatLong, bottomLeftLatLong, page - 1, pageSize);
+            this.merchantList = responseData.content;
+            if (responseData.content.length === 0) {
+                this.isNoMerchants = true;
+            }
+            this.totalPage = responseData.pageable.totalPages;
+            this.currentPage = page;
+            this.firstPage = responseData.pageable.first;
+            this.lastPage = responseData.pageable.last;
+            this.prevUrlFormat = prevUrlFormat;
+        } catch (error) {
             alert("서버와 통신 실패");
-            console.log(error);
+            this.handleError(error);
+            // console.log(error);
         }
     }
 
     @action
-    searchMerchantBySearchInput = async (searchInput : string) =>{
-        try{
-            this.merchantList = await merchantApi.getMerchantListBySearch(searchInput);
-        }catch(error){
-            alert("서버와 통신 실패");
-            console.log(error);
+    changePage = async (page: number) => {
+        try {
+            this.clickedMerchant = {} as MerchantType;
+            const responseData = await merchantApi.changePage(this.prevUrlFormat, page - 1);
+            this.merchantList = responseData.content;
+            if (responseData.content.length === 0) {
+                this.isNoMerchants = true;
+            }
+            this.currentPage = page;
+            this.firstPage = responseData.first;
+            this.lastPage = responseData.last;
+        } catch (error) {
+            alert('서버와 통신 실패');
+            this.handleError(error);
+            // console.log(error);
         }
     }
+
+    @action
+    searchMerchantBySearchInput = async (searchInput: string, currentLatLong: [number, number], topRightLatLong: [number, number], bottomLeftLatLong: [number, number], page: number, pageSize: number) => {
+        try {
+            this.clickedMerchant = {} as MerchantType;
+            // this.merchantList = await merchantApi.getMerchantListBySearch(searchInput);
+            const [prevUrlFormat, responseData] = await merchantApi.getMerchantListBySearch(searchInput, currentLatLong, topRightLatLong, bottomLeftLatLong, page - 1, pageSize);
+            this.merchantList = responseData.content;
+            if (responseData.content.length === 0) {
+                this.isNoMerchants = true;
+            }
+            this.totalPage = responseData.pageable.totalPages;
+            this.currentPage = page;
+            this.firstPage = responseData.pageable.first;
+            this.lastPage = responseData.pageable.last;
+            this.prevUrlFormat = prevUrlFormat;
+
+        } catch (error) {
+            alert('서버와 통신 실패');
+            this.handleError(error);
+            // console.log(error);
+        }
+    }
+
+    @action
+    setRefs = (merchants: MerchantType[]) => {
+        const refs = merchants.reduce((acc: any, merchant: any) => {
+            acc[merchant.id] = React.createRef();
+            return acc;
+        }, {});
+        this.refs = refs;
+    }
+    @action
+    setClickedMerchant = (merchant: MerchantType) => {
+        this.clickedMerchant = merchant;
+    }
+
+    @action
+    setCurrentPage = (page: number) => {
+        this.currentPage = page;
+    }
+
+    @action
+    setMerchantList = (merchantList : MerchantType[]) => {
+        this.clickedMerchant = {} as MerchantType;
+        this.merchantList = merchantList;
+    }
+
     // @action
     // put = (name: string, price: number) => {
     //     const { number } = this.root.counter;

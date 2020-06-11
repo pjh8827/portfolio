@@ -2,6 +2,7 @@ package com.ssafy.api.handler;
 
 import com.ssafy.domain.exception.EmptyListException;
 import com.ssafy.domain.exception.NotFoundException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
